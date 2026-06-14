@@ -1,6 +1,7 @@
 'use client';
 
 import { Suspense, useEffect } from 'react';
+import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function InProgressPage() {
@@ -88,18 +89,18 @@ function InProgressContent() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
+            <Link
               href="/"
               className="glow-button bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-600 text-white px-8 py-4 rounded-2xl text-base md:text-lg font-bold transition-all duration-300"
             >
               Back to Home
-            </a>
-            <a
+            </Link>
+            <Link
               href={from === 'signup' ? '/login' : '/signup'}
               className="glow-button glass-card text-white px-8 py-4 rounded-2xl text-base md:text-lg font-bold transition-all duration-300"
             >
               {from === 'signup' ? 'Go to Login' : 'Create an Account'}
-            </a>
+            </Link>
           </div>
         </div>
       </div>

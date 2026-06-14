@@ -97,7 +97,7 @@ export default function SignupPage() {
                     { num: '2', gradient: 'from-cyan-500 to-blue-600', title: 'Join Your Clubs', desc: 'Connect with existing clubs or create new ones' },
                     { num: '3', gradient: 'from-purple-500 to-pink-600', title: 'Start Collaborating', desc: 'Connect with clubs across Washington state' },
                     { num: '4', gradient: 'from-emerald-500 to-teal-600', title: 'Make Impact', desc: 'Track your achievements and inspire others' },
-                  ].map((step, i) => (
+                  ].map((step) => (
                     <div key={step.num} className="feature-card glass-card rounded-2xl p-5">
                       <div className="flex items-center space-x-4">
                         <div className={`w-10 h-10 bg-gradient-to-br ${step.gradient} rounded-xl flex items-center justify-center text-white font-bold text-sm`}>{step.num}</div>

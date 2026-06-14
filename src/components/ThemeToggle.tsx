@@ -19,10 +19,13 @@ export default function ThemeToggle() {
 
   // Sync state with whatever the pre-paint script already applied.
   useEffect(() => {
-    const current =
-      (document.documentElement.getAttribute('data-theme') as Theme | null) ?? 'dark';
-    setTheme(current);
-    setMounted(true);
+    const frame = requestAnimationFrame(() => {
+      const current =
+        (document.documentElement.getAttribute('data-theme') as Theme | null) ?? 'dark';
+      setTheme(current);
+      setMounted(true);
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   function toggle() {
