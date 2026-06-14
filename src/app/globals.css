@@ -1,26 +1,591 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap');
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ─────────────────────────────────────────────
+   ClubSync theme — ported from the StuImpact
+   design system (stuimpactweb4).
+   Default (no attribute) = LIGHT (warm cream).
+   [data-theme="dark"]    = DARK (deep navy).
+   ───────────────────────────────────────────── */
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+  --color-bg: 244 243 238;
+  --color-bg-deep: 231 228 217;
+  --color-panel: 255 255 255;
+  --color-panel-hi: 238 236 226;
+  --color-text: 16 19 47;
+  --color-text-dim: 70 75 106;
+  --color-text-mute: 125 131 161;
+  --color-primary: 91 108 255;
+  --color-primary-hi: 68 88 239;
+  --color-accent-pink: 255 82 151;
+  --color-accent-orange: 255 132 72;
+  --color-accent-teal: 38 188 204;
+  --color-accent-yellow: 244 197 66;
+  --color-accent-green: 81 190 118;
+  --color-accent-purple: 143 105 255;
+  --color-border: 25 29 68;
+
+  --bg: rgb(var(--color-bg));
+  --bg-deep: rgb(var(--color-bg-deep));
+  --panel: rgb(var(--color-panel));
+  --panel-hi: rgb(var(--color-panel-hi));
+  --text: rgb(var(--color-text));
+  --text-dim: rgb(var(--color-text-dim));
+  --text-mute: rgb(var(--color-text-mute));
+  --primary: rgb(var(--color-primary));
+  --primary-hi: rgb(var(--color-primary-hi));
+  --accent-pink: rgb(var(--color-accent-pink));
+  --accent-orange: rgb(var(--color-accent-orange));
+  --accent-teal: rgb(var(--color-accent-teal));
+  --accent-yellow: rgb(var(--color-accent-yellow));
+  --accent-green: rgb(var(--color-accent-green));
+  --accent-purple: rgb(var(--color-accent-purple));
+  --border: rgba(var(--color-border), 0.1);
+  --border-strong: rgba(var(--color-border), 0.18);
+  --background: var(--bg);
+  --foreground: var(--text);
+
+  --radius-panel: 14px;
+  --radius-panel-lg: 22px;
+  --radius-pill: 999px;
+  --shadow-soft: 0 1px 2px rgba(16, 19, 47, 0.06);
+  --shadow-card: 0 18px 46px -28px rgba(16, 19, 47, 0.28);
+  --shadow-lift: 0 28px 70px -30px rgba(16, 19, 47, 0.36);
+  --shadow-warm: 0 14px 34px -14px rgba(255, 82, 151, 0.48);
+  --shadow-primary: 0 16px 34px -18px rgba(91, 108, 255, 0.65);
+  --shape-opacity: 0.74;
+  --hero-field:
+    radial-gradient(circle at 8% 30%, rgba(255, 82, 151, 0.12), transparent 26%),
+    radial-gradient(circle at 92% 18%, rgba(38, 188, 204, 0.12), transparent 24%),
+    linear-gradient(180deg, rgb(var(--color-bg)), rgb(var(--color-bg-deep)));
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg: 31 30 54;
+  --color-bg-deep: 22 22 40;
+  --color-panel: 24 25 47;
+  --color-panel-hi: 36 36 68;
+  --color-text: 247 248 255;
+  --color-text-dim: 205 211 235;
+  --color-text-mute: 141 150 188;
+  --color-primary: 111 128 255;
+  --color-primary-hi: 135 149 255;
+  --color-accent-pink: 238 64 135;
+  --color-accent-orange: 255 137 72;
+  --color-accent-teal: 43 180 205;
+  --color-accent-yellow: 239 205 91;
+  --color-accent-green: 95 204 133;
+  --color-accent-purple: 137 114 255;
+  --color-border: 212 218 255;
+
+  --border: rgba(var(--color-border), 0.045);
+  --border-strong: rgba(var(--color-border), 0.075);
+  --shadow-soft: 0 1px 1px rgba(0, 0, 0, 0.3);
+  --shadow-card: 0 22px 58px -34px rgba(0, 0, 0, 0.75);
+  --shadow-lift: 0 32px 82px -28px rgba(0, 0, 0, 0.86);
+  --shadow-warm: 0 18px 44px -18px rgba(238, 64, 135, 0.55);
+  --shadow-primary: 0 18px 44px -20px rgba(111, 128, 255, 0.72);
+  --shape-opacity: 0.86;
+  --hero-field:
+    radial-gradient(circle at 8% 30%, rgba(238, 64, 135, 0.16), transparent 25%),
+    radial-gradient(circle at 92% 18%, rgba(43, 180, 205, 0.16), transparent 24%),
+    linear-gradient(180deg, rgb(var(--color-bg)), rgb(var(--color-bg-deep)));
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bg);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  min-height: 100%;
+  background: var(--hero-field);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+h1, h2, h3, h4, h5, h6,
+.font-heading {
+  font-family: 'Sora', sans-serif;
+  letter-spacing: 0;
+}
+
+::selection {
+  background: rgba(var(--color-primary), 0.22);
+  color: var(--text);
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--color-text), 0.18);
+  border-radius: var(--radius-pill);
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(var(--color-text), 0.28); }
+
+/* ─── Form fields (StuImpact panel language) ─── */
+input, textarea, select {
+  background: rgb(var(--color-panel) / 0.82) !important;
+  color: var(--text) !important;
+  border: 1px solid rgba(var(--color-border), 0.08) !important;
+  border-radius: var(--radius-panel) !important;
+  padding: 0.85rem 1.1rem !important;
+  font-size: 1rem !important;
+  line-height: 1.4 !important;
+  width: 100% !important;
+  box-shadow: var(--shadow-soft) !important;
+  transition: all 0.2s ease !important;
+  backdrop-filter: blur(12px) !important;
+  appearance: none !important;
+}
+
+input[type="checkbox"] {
+  width: 1.1rem !important;
+  height: 1.1rem !important;
+  padding: 0 !important;
+  border-radius: 6px !important;
+  accent-color: var(--primary);
+  flex-shrink: 0;
+}
+
+input::placeholder, textarea::placeholder, select::placeholder {
+  color: var(--text-mute) !important;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none !important;
+  border-color: rgba(var(--color-primary), 0.6) !important;
+  box-shadow: 0 0 0 3px rgba(var(--color-primary), 0.18) !important;
+}
+
+select {
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%2310132f' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 0.85rem center;
+  background-size: 1rem;
+  padding-right: 2.6rem !important;
+  cursor: pointer;
+}
+
+[data-theme="dark"] select {
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23f7f8ff' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+}
+
+select option { background: var(--panel); color: var(--text); }
+
+/* ─── Light-mode utility remaps ───
+   The pages were authored with Tailwind utilities tuned for a dark
+   canvas. Remap the common text/surface utilities onto the StuImpact
+   palette so the same markup reads correctly on the cream theme. */
+[data-theme="light"] .text-white { color: var(--text); }
+[data-theme="light"] .text-gray-100 { color: var(--text); }
+[data-theme="light"] .text-gray-200 { color: var(--text-dim); }
+[data-theme="light"] .text-gray-300 { color: var(--text-dim); }
+[data-theme="light"] .text-gray-400 { color: var(--text-mute); }
+[data-theme="light"] .text-gray-500 { color: var(--text-mute); }
+[data-theme="light"] .hover\:text-white:hover { color: var(--text); }
+
+/* …but keep text white where it sits on a saturated button / badge / avatar. */
+[data-theme="light"] .bg-gradient-to-r.text-white,
+[data-theme="light"] .bg-gradient-to-r .text-white,
+[data-theme="light"] .bg-gradient-to-br.text-white,
+[data-theme="light"] .bg-gradient-to-br .text-white,
+[data-theme="light"] .bg-gradient-to-l.text-white,
+[data-theme="light"] .bg-indigo-600.text-white,
+[data-theme="light"] .bg-indigo-600 .text-white,
+[data-theme="light"] [class*="bg-gradient"] .text-white {
+  color: #fff;
+}
+
+/* Tone deep-gray surfaces toward the warm panel scale in light mode. */
+[data-theme="light"] .bg-gray-900,
+[data-theme="light"] .bg-gray-800 { background-color: var(--panel-hi); }
+[data-theme="light"] .border-gray-800,
+[data-theme="light"] .border-gray-700,
+[data-theme="light"] .border-gray-600\/50 { border-color: var(--border); }
+
+/* ─── Animations ─── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-20px) rotate(2deg); }
+  66% { transform: translateY(10px) rotate(-1deg); }
+}
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes bounceIn {
+  0% { opacity: 0; transform: scale(0.3); }
+  50% { opacity: 1; transform: scale(1.05); }
+  70% { transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes floatY {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(var(--shape-rotate, 0deg)); }
+  50% { transform: translate3d(0, -14px, 0) rotate(calc(var(--shape-rotate, 0deg) + 2deg)); }
+}
+@keyframes driftX {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(var(--shape-rotate, 0deg)); }
+  50% { transform: translate3d(18px, 10px, 0) rotate(calc(var(--shape-rotate, 0deg) - 2deg)); }
+}
+@keyframes arcPulse {
+  0%, 100% { transform: scale(1) rotate(var(--shape-rotate, 0deg)); opacity: var(--shape-opacity); }
+  50% { transform: scale(1.04) rotate(calc(var(--shape-rotate, 0deg) + 3deg)); opacity: 1; }
+}
+
+/* ─── Page background: hero-field + floating geometric shapes ─── */
+.gradient-bg {
+  position: relative;
+  background: var(--hero-field);
+}
+
+/* Drifting pill + pulsing arc ring, StuImpact "site-backdrop" language. */
+.gradient-bg::before,
+.gradient-bg::after {
+  content: "";
+  position: fixed;
+  border-radius: var(--radius-pill);
+  opacity: calc(var(--shape-opacity) * 0.62);
+  filter: saturate(1.12);
+  pointer-events: none;
+  z-index: 0;
+}
+.gradient-bg::before {
+  width: clamp(220px, 38vw, 620px);
+  height: clamp(88px, 13vw, 180px);
+  left: -7vw;
+  top: 9vh;
+  --shape-rotate: 44deg;
+  transform: rotate(var(--shape-rotate));
+  background: linear-gradient(100deg, rgba(var(--color-primary), 0.85), rgba(var(--color-accent-teal), 0.72));
+  animation: driftX 14s ease-in-out infinite;
+}
+.gradient-bg::after {
+  width: clamp(220px, 34vw, 520px);
+  height: clamp(220px, 34vw, 520px);
+  right: -11vw;
+  top: -16vw;
+  border: clamp(18px, 2.8vw, 42px) solid rgba(var(--color-accent-teal), 0.72);
+  background: transparent;
+  animation: arcPulse 12s ease-in-out infinite;
+}
+
+/* Neutralize the old neon blurred orbs — the geometric shapes replace them. */
+.gradient-bg [class*="blur-3xl"],
+.gradient-bg [class*="blur-2xl"] { display: none !important; }
+
+/* Decorative accent dots: recolor onto the pastel palette. */
+.gradient-bg .floating-orb.bg-indigo-400 { background: var(--primary) !important; }
+.gradient-bg .floating-orb.bg-cyan-400 { background: var(--accent-teal) !important; }
+.gradient-bg .floating-orb.bg-purple-400 { background: var(--accent-purple) !important; }
+.gradient-bg .floating-orb.bg-emerald-400 { background: var(--accent-green) !important; }
+
+/* CLUBSYNC watermark recolors via these utilities already on the element. */
+
+/* ─── Panels (glass-card / dark / dashboard) → StuImpact panels ─── */
+.glass-card {
+  position: relative;
+  border: 1px solid transparent;
+  border-radius: var(--radius-panel-lg);
+  background: linear-gradient(135deg, rgb(var(--color-panel) / 0.94), rgb(var(--color-panel-hi) / 0.78));
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(16px);
+}
+
+.glass-card-dark {
+  border: 1px solid transparent;
+  border-radius: var(--radius-panel-lg);
+  background: linear-gradient(135deg, rgb(var(--color-panel) / 0.9), rgb(var(--color-panel-hi) / 0.7));
+  box-shadow: var(--shadow-lift);
+  backdrop-filter: blur(18px);
+}
+
+.hero-dashboard {
+  border: 1px solid transparent;
+  border-radius: var(--radius-panel-lg);
+  background: linear-gradient(135deg, rgb(var(--color-panel)), rgb(var(--color-panel-hi)));
+  box-shadow: var(--shadow-lift);
+}
+
+.nav-glass {
+  border-bottom: 1px solid rgba(var(--color-border), 0.06);
+  background: color-mix(in srgb, var(--bg-deep) 78%, transparent);
+  backdrop-filter: blur(22px);
+}
+
+.floating-orb { animation: float 10s ease-in-out infinite; }
+
+/* ─── Buttons ─── */
+.glow-button {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s cubic-bezier(.2,.8,.2,1), box-shadow 0.2s ease, background 0.2s ease;
+  display: inline-block;
+}
+.glow-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lift);
+}
+.glow-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transition: left 0.6s;
+}
+.glow-button:hover::before { left: 100%; }
+
+/* ─── Gradient / accent text ─── */
+.brand-text,
+.shimmer-text {
+  background: linear-gradient(95deg, var(--accent-teal), var(--primary), var(--accent-pink), var(--accent-orange));
+  background-size: 300% 300%;
+  animation: gradient-shift 10s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+/* shimmer-text is also used as a plain heading wrapper; keep its overlay sheen */
+.shimmer-text { position: relative; }
+
+.success-highlight,
+.safety-highlight {
+  background: linear-gradient(135deg, var(--accent-green), var(--accent-teal));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.impact-highlight,
+.beta-highlight {
+  background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.leadership-highlight {
+  background: linear-gradient(135deg, var(--accent-purple), var(--primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.danger-highlight {
+  background: linear-gradient(135deg, var(--accent-pink), var(--accent-orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Cards & hover ─── */
+.feature-card {
+  transition: transform 0.22s cubic-bezier(.2,.8,.2,1), box-shadow 0.22s ease, background 0.22s ease;
+  position: relative;
+  overflow: hidden;
+}
+.feature-card:hover {
+  transform: translateY(-6px) scale(1.006);
+  box-shadow: var(--shadow-lift);
+}
+
+/* ─── Top accent line (was harsh RGB) ─── */
+.rgb-line {
+  background: linear-gradient(95deg, var(--accent-teal), var(--primary), var(--accent-pink), var(--accent-orange));
+  background-size: 300% 300%;
+  animation: gradient-shift 10s ease infinite;
+}
+
+.scroll-indicator { animation: float 3s ease-in-out infinite; }
+
+.mobile-menu {
+  transform: translateX(100%);
+  transition: transform 0.4s ease-in-out;
+  background: linear-gradient(135deg, rgb(var(--color-panel)), rgb(var(--color-panel-hi))) !important;
+  border-left: 1px solid rgba(var(--color-border), 0.08) !important;
+}
+.mobile-menu.open { transform: translateX(0); }
+
+.stat-card { animation: scale-in 0.8s ease-out forwards; opacity: 0; }
+.testimonial-card { animation: slide-up 0.6s ease-out forwards; opacity: 0; }
+
+/* ─── Scroll reveal helpers ─── */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-out;
+}
+.scroll-animate.animate { opacity: 1; transform: translateY(0); }
+.slide-in-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 0.8s ease-out;
+}
+.slide-in-left.animate { opacity: 1; transform: translateX(0); }
+.slide-in-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: all 0.8s ease-out;
+}
+.slide-in-right.animate { opacity: 1; transform: translateX(0); }
+.bounce-in {
+  opacity: 0;
+  transform: scale(0.3);
+  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.bounce-in.animate { opacity: 1; transform: scale(1); }
+
+/* ─── Theme toggle (floating, StuImpact pill) ─── */
+.theme-toggle {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 60;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(var(--color-panel) / 0.8);
+  border: 1px solid rgba(var(--color-border), 0.08);
+  color: var(--primary);
+  backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.theme-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-primary);
+}
+.theme-toggle svg { width: 1.4rem; height: 1.4rem; }
+
+/* ─── Modal (StuImpact panel card) ─── */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  background:
+    radial-gradient(circle at 22% 18%, rgb(var(--color-accent-pink) / 0.16), transparent 28%),
+    radial-gradient(circle at 78% 18%, rgb(var(--color-accent-teal) / 0.14), transparent 30%),
+    rgb(var(--color-bg-deep) / 0.66);
+  backdrop-filter: blur(14px);
+}
+.modal.show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: fadeInUp 0.3s ease-out;
+}
+.modal-content {
+  background: linear-gradient(135deg, rgb(var(--color-panel) / 0.98), rgb(var(--color-panel-hi) / 0.92));
+  border: 1px solid rgba(var(--color-border), 0.06);
+  border-radius: var(--radius-panel-lg);
+  padding: 2.5rem;
+  max-width: 640px;
+  width: 100%;
+  position: relative;
+  animation: bounceIn 0.5s ease-out;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lift);
+  color: var(--text);
+}
+@media (max-width: 640px) {
+  .modal-content { padding: 1.75rem 1.25rem; border-radius: var(--radius-panel); }
+}
+.modal-close {
+  position: absolute;
+  right: 1.25rem;
+  top: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
+  background: rgb(var(--color-panel-hi) / 0.86);
+  border: none;
+  border-radius: var(--radius-pill);
+  line-height: 1;
+}
+.modal-close:hover {
+  transform: translateY(-1px);
+  background: rgb(var(--color-primary) / 0.12);
+  color: var(--text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Hide the big floating shapes on small screens to avoid clutter. */
+@media (max-width: 640px) {
+  .gradient-bg::before {
+    top: 64vh; left: -56vw; width: 360px; height: 104px; opacity: 0.34;
+  }
+  .gradient-bg::after {
+    top: -120px; right: -160px; width: 280px; height: 280px; opacity: 0.6;
+  }
+}
+
+/* ─── Responsive Hero ─── */
+@media (max-width: 768px) {
+  .hero-title { font-size: 2.5rem !important; line-height: 1.05; }
+  .hero-subtitle { font-size: 1.25rem !important; }
+  .hero-description { font-size: 1rem !important; }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hero-title { font-size: 4rem !important; line-height: 1.05; }
+  .hero-subtitle { font-size: 1.5rem !important; }
+  .hero-description { font-size: 1.125rem !important; }
+}
+@media (min-width: 1025px) {
+  .hero-title { font-size: 5rem !important; line-height: 1.05; }
+  .hero-subtitle { font-size: 2rem !important; }
+  .hero-description { font-size: 1.25rem !important; }
 }
