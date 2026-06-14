@@ -37,7 +37,7 @@ Still in progress:
 - Persisting club signup applications instead of using the temporary simulated submission flow.
 - Adding automated tests around auth, routing, and form validation.
 
-## Why this matters to recruiters
+## Engineering value
 
 This repo shows a real migration in flight, not a throwaway starter app. The useful engineering signal is in the conversion from a monolithic Flask-style project into a modern frontend architecture:
 
@@ -107,4 +107,4 @@ The checked-in Firebase values are placeholders for the migration scaffold. Prod
 
 ## Status
 
-ClubSync Web is a public, recruiter-facing snapshot of an ongoing migration. It is ready to review as frontend architecture and product direction, with backend/auth completion clearly scoped as the next phase.
+ClubSync Web is a public snapshot of an ongoing migration. It is useful for understanding the frontend architecture, product direction, and remaining backend/auth work that will complete the next phase.
